@@ -1,14 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import searchIcon from "../../resorces/search.svg";
+import { AppContext } from "../../context";
 import "./SearchItem.scss";
 
-const SearchItem = ({
-    searchTask,
-    showAllTasks,
-    wasSearched,
-    setWasSearched,
-}) => {
+const SearchItem = () => {
     const [searchText, setSearchText] = useState("");
+    const { searchTask, showAllTasks, wasSearched, setWasSearched } =
+        useContext(AppContext);
 
     const onValueChangeSearch = ({ target }) => {
         setSearchText(target.value);

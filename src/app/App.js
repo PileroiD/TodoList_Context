@@ -4,6 +4,7 @@ import TodoListService from "../services/TodoListService";
 
 import { useState, useEffect } from "react";
 import "./App.scss";
+import { AppContext } from "../context";
 
 function App() {
     const [tasks, setTasks] = useState([]);
@@ -93,29 +94,31 @@ function App() {
     };
 
     return (
-        <div className="app">
-            <div className="container">
-                <Actions
-                    addTask={addTask}
-                    searchTask={searchTask}
-                    showAllTasks={showAllTasks}
-                    sortTasks={sortTasks}
-                    wasSearched={wasSearched}
-                    setWasSearched={setWasSearched}
-                />
-                {isLoading ? (
-                    <div className="loader"></div>
-                ) : tasks.length ? (
-                    <ItemsList
-                        updateTask={updateTask}
-                        tasks={tasks}
-                        deleteTask={deleteTask}
-                    />
-                ) : (
-                    <div className="noTasks">No tasks</div>
-                )}
+        <AppContext.Provider
+            value={{
+                addTask,
+                searchTask,
+                showAllTasks,
+                wasSearched,
+                setWasSearched,
+                sortTasks,
+                updateTask,
+                deleteTask,
+            }}
+        >
+            <div className="app">
+                <div className="container">
+                    <Actions />
+                    {isLoading ? (
+                        <div className="loader"></div>
+                    ) : tasks.length ? (
+                        <ItemsList tasks={tasks} />
+                    ) : (
+                        <div className="noTasks">No tasks</div>
+                    )}
+                </div>
             </div>
-        </div>
+        </AppContext.Provider>
     );
 }
 

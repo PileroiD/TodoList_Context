@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import iconPencil from "../../resorces/pencil.svg";
 import trashBucket from "../../resorces/trash.svg";
+import { AppContext } from "../../context";
 
 import "./Item.scss";
 
 const Item = (props) => {
     const [newText, setNewText] = useState(props.taskInfo.text);
+    const { updateTask, deleteTask } = useContext(AppContext);
 
     const handleChangeClick = ({ target }) => {
         target.previousElementSibling.focus();
@@ -17,11 +19,11 @@ const Item = (props) => {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        props.updateTask(newText, props.taskId);
+        updateTask(newText, props.taskId);
     };
 
     const handleDeleteItem = () => {
-        props.deleteTask(props.taskId);
+        deleteTask(props.taskId);
     };
 
     return (

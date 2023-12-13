@@ -4,25 +4,13 @@ import SortTasks from "../sortTasks/SortTasks";
 
 import "./Actions.scss";
 
-const Actions = ({
-    addTask,
-    searchTask,
-    showAllTasks,
-    sortTasks,
-    wasSearched,
-    setWasSearched,
-}) => {
+const Actions = () => {
     return (
         <div className="actions">
-            <AddTask addTask={addTask} />
+            <AddTask />
             <div className="searching">
-                <SearchItem
-                    searchTask={searchTask}
-                    showAllTasks={showAllTasks}
-                    wasSearched={wasSearched}
-                    setWasSearched={setWasSearched}
-                />
-                <SortTasks sortTasks={sortTasks} />
+                <SearchItem />
+                <SortTasks />
             </div>
         </div>
     );

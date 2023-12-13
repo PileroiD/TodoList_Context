@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./AddTask.scss";
+import { AppContext } from "../../context";
 
-const AddTask = (props) => {
+const AddTask = () => {
     const [text, setText] = useState("");
+    const { addTask } = useContext(AppContext);
 
     const onSubmit = (event) => {
         event.preventDefault();
         if (text && text.length < 60) {
-            props.addTask(text);
+            addTask(text);
         }
         setText("");
     };
